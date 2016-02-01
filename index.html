@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+
+<html ng-app="orderBoxes">
+  <head>
+    <title>FantasticBoxCo</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/angular-flash.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/orderBoxesController.js"></script>
+  </head>
+
+  <body ng-controller='orderBoxesController as orderBoxesCtrl'>
+    <center>
+      <header>
+      <h1 class="logo">FantasticBoxCo</h1>
+      </header>
+
+
+      <div id="step-1" class="content" ng-hide='orderBoxesCtrl.step1'>
+        <h2>Step 1/4 - Dimensions &amp; Quantity</h2>
+
+        <p class="intro">
+        Enter the width, height, length and quantity of the box(es) you require.
+        </p>
+
+        <ol class="first-form">
+          <input type="number" id="width" ng-model='orderBoxesCtrl.width' class="form-control" placeholder="width" min="0" step="0.01" required autofocus><br>
+          <input type="number" id="height" ng-model='orderBoxesCtrl.height' class="form-control" placeholder="height" min="0" step="0.01" required autofocus><br>
+          <input type="number" id="length" ng-model='orderBoxesCtrl.length' class="form-control" placeholder="length" min="0" step="0.01" required autofocus><br>
+          <input type="number" id="quantity" ng-model='orderBoxesCtrl.quantity' class="form-control" placeholder="quantity" min="0" step="0.01" required autofocus><br>
+          <button class='btn close-step-1' ng-click='orderBoxesCtrl.showStep2()' >Next</button>
+        </ol>
+      </div>
+
+      <div id="step-2" ng-show='orderBoxesCtrl.step2'
+        class="animated slideInUp">
+        <h2>Step 2/4 - Cardboard Grade</h2>
+
+        <p class="intro">
+        <strong>FantasticBoxCo</strong> offer a variety of grades of
+        cardboard, each altering the price per m<sup>2</sup>: </p>
+
+        <ol class="btn-radios-list">
+          <li>
+          <label>
+            <input type="radio" name="cardboard-grade" ng-model="orderBoxesCtrl.grade" value="A">
+            <span class="btn btn-radio">
+              A Grade &pound;0.20 m<sup>2</sup>
+            </span>
+          </label><br>
+          </li>
+          <li>
+          <label>
+            <input type="radio" name="cardboard-grade" ng-model="orderBoxesCtrl.grade" value="B">
+            <span class="btn btn-radio">
+              B Grade &pound;0.10 m<sup>2</sup>
+            </span>
+          </label><br>
+          </li>
+          <li>
+          <label>
+            <input type="radio" name="cardboard-grade" ng-model="orderBoxesCtrl.grade" value="C">
+            <span class="btn btn-radio">
+              C Grade &pound;0.05 m<sup>2</sup>
+            </span>
+          </label><br>
+          </li>
+        </ol>
+        <br>
+        <button class='btn back-to-step-1' ng-click='orderBoxesCtrl.backToStep1()' >Back</button>
+        <button class='btn close-step-2' ng-click='orderBoxesCtrl.showStep3()' >Next</button>
+      </div>
+      <br>
+      <div id='gradeCWarning' ng-show='orderBoxesCtrl.selectedGradeC' class='warning'>
+        You can not select C grade with boxes bigger that 2M<sup>2</sup> Please
+        select an other grade
+      </div>
+
+      <div id="step-3" class="animated slideInUp" ng-show="orderBoxesCtrl.step3">
+        <h2>Step 3/4 - Print Quality</h2>
+
+        <p class="intro">
+        A variety of printing options are available for any branding / logos which are required:
+        </p>
+
+        <ol class="btn-radios-list">
+          <li>
+          <label>
+            <input type="radio" name="print-quality"
+            ng-model="orderBoxesCtrl.printQuality" value="3-color">
+            <span class="btn btn-radio">
+              3 colours &pound;0.20 m<sup>2</sup>
+            </span>
+          </label><br>
+          </li>
+          <li>
+          <label>
+            <input type="radio" name="print-quality" ng-model="orderBoxesCtrl.printQuality" value="2-color">
+            <span class="btn btn-radio">
+              2 colours &pound;0.10 m<sup>2</sup>
+            </span>
+          </label><br>
+          </li>
+          <li>
+          <label>
+            <input type="radio" name="print-quality" ng-model="orderBoxesCtrl.printQuality" value="black-only">
+            <span class="btn btn-radio">
+              Black only &pound;0.05 m<sup>2</sup>
+            </span>
+          </label><br>
+          </li>
+          <li>
+          <label>
+            <input type="radio" name="print-quality" ng-model="orderBoxesCtrl.printQuality" value="no-printing">
+            <span class="btn btn-radio">
+              No printing &pound;0.00
+            </span>
+          </label><br>
+          </li>
+          <li>
+          <label>
+            <input type="radio" name="print-quality" ng-model="orderBoxesCtrl.printQuality" value="FantasticBoxCo-branding">
+            <span class="btn btn-radio">
+              <strong>FantasticBoxCo</strong> branding<br>5% discount on total price
+            </span>
+          </label><br>
+          </li>
+        </ol>
+        <br>
+        <button class='btn back-to-step-3' ng-click='orderBoxesCtrl.backToStep2()' >Back</button>
+      </button>
+      <button class='btn close-step-3' ng-click='orderBoxesCtrl.showStep4()' >Next</button>
+    </button>
+
+  </div>
+
+  <div id="step-4" class="animated slideInUp" ng-show='orderBoxesCtrl.step4'>
+    <h2>Step 4 - Optional Extras</h2>
+
+    <ol class="btn-radios-list">
+      <li>
+      <label>
+        <input type="radio" ng-model="orderBoxesCtrl.optionExtra" value="handles">
+        <span class="btn btn-radio">
+          Handles &pound;0.10 per box
+        </span>
+      </label>
+      </li>
+      <li>
+      <label>
+        <input type="radio" ng-model="orderBoxesCtrl.optionExtra" value="reinforced-bottom">
+        <span class="btn btn-radio">
+          Reinforced bottom &pound;0.05 per box<br>
+          <small>(only available with grade A cardboard)</small>
+        </span>
+      </label>
+      </li>
+    </ol>
+
+
+    <div class="form-actions">
+      <button class='btn back-to-step-3' ng-click='orderBoxesCtrl.backToStep3()' >Back</button>
+    <button type="button" ng-click='orderBoxesCtrl.addBox()' class="btn add-box">
+      Add box
+    </button>
+    <button type="button" ng-click='orderBoxesCtrl.completeOrder()' class="btn finish">
+      Finish
+    </button>
+  </div>
+</div>
+<br>
+<div id='reinforcedBottomWarning' ng-show='orderBoxesCtrl.selectedReinforcedBottom' class='warning'>
+  You can not select Reinforced bottom with grade different than A. Please
+  select an other grade.
+</div>
+
+<div id="total-cost" class="animated slideInUp" ng-show='orderBoxesCtrl.tot'>
+  <h2>Your Cart: </h2>
+  <div ng-repeat='item in orderBoxesCtrl.order' class='btn-radios-list'>
+    <dl>
+      <dt>Dimensions &amp; Quantity:  </dt>
+      <dd id='dimensions'>{{ item.quantity }} &times; {{ item.with }}(W)&times;{{ item.height
+      }}(H)&times;{{ item.length }}(L)</dd>
+
+      <dt>Cardboard Grade:</dt>
+      <dd id='cardboard-grade'>{{ item.grade }}</dd>
+
+      <dt>Print Quality:</dt>
+      <dd id='quality'>{{ item.quality }}</dd>
+
+      <dt>Optional Extras:</dt>
+      <dd id='options'> {{ item.options }}
+      </dd>
+
+      <dt>Total Cost:</dt>
+      <dd id='partial-cost'>&pound;{{ item.totCost }}</dd>
+      <br>
+    </dl>
+  </div>
+  <br>
+  <strong>total cost: </strong> {{ orderBoxesCtrl.sum() }}
+
+</div>
+      </center>
+    </body>
+  </html>
