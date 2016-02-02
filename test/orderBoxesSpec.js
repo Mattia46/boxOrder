@@ -9,7 +9,7 @@ describe('orderBoxesController', function() {
     ctrl.order = [];
   }));
 
-  it('initialize with an empty search result', function() {
+  it('initialize with an empty order array', function() {
     expect(angular.isFunction(ctrl.createBox)).toBe(true);
   });
 
